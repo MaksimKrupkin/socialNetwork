@@ -103,3 +103,5 @@ E:\SocialNetwork\api\obj\Debug\net8.0\refint\api.dll
 E:\SocialNetwork\api\obj\Debug\net8.0\api.pdb
 E:\SocialNetwork\api\obj\Debug\net8.0\api.genruntimeconfig.cache
 E:\SocialNetwork\api\obj\Debug\net8.0\ref\api.dll
+E:\SocialNetwork\api\obj\Debug\net8.0\api.sourcelink.json
+E:\SocialNetwork\api\bin\Debug\net8.0\BCrypt.Net-Next.dll
