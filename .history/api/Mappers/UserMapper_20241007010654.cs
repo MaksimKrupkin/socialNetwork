@@ -20,39 +20,39 @@ namespace api.Mappers
         }
 
         // Преобразование User в UserWithDetailsDto
-public static UserWithDetailsDto ToUserWithDetailsDto(this User user)
-{
-    return new UserWithDetailsDto
-    {
-        Id = user.Id,
-        Email = user.Email,
-        Bio = user.Bio,
-        ProfileImageUrl = user.ProfileImageUrl,
-        CreatedAt = user.CreatedAt,
-        BirthDay = user.BirthDay,
-        Chats = user.AllChats?.Select(c => new ChatDto
+        public static UserWithDetailsDto ToUserWithDetailsDto(this User user)
         {
-            Id = c.Id,
-            User1Id = c.User1Id,
-            User2Id = c.User2Id,
-            CreatedAt = c.CreatedAt,
-            Messages = c.Messages?.Select(m => new MessageDto
+            return new UserWithDetailsDto
             {
-                Id = m.Id,
-                Content = m.Content,
-                SentAt = m.SentAt
-            }).ToList() ?? new List<MessageDto>()
-        }).ToList() ?? new List<ChatDto>(), // Используйте пустой список, если AllChats == null
-        Posts = user.Posts?.Select(p => new PostDto
-        {
-            Id = p.Id,
-            Content = p.Content,
-            CreatedAt = p.CreatedAt
-        }).ToList() ?? new List<PostDto>(), // Используйте пустой список, если Posts == null
-        Followers = user.Followers?.Select(f => f.Follower.ToUserDto()).ToList() ?? new List<UserDto>(), // Используйте пустой список, если Followers == null
-        Following = user.Following?.Select(f => f.Followee.ToUserDto()).ToList() ?? new List<UserDto>() // Используйте пустой список, если Following == null
-    };
-}
+                Id = user.Id,
+                Email = user.Email,
+                Bio = user.Bio,
+                ProfileImageUrl = user.ProfileImageUrl,
+                CreatedAt = user.CreatedAt,
+                BirthDay = user.BirthDay,
+                Chats = user.AllChats.Select(c => new ChatDto
+                {
+                    Id = c.Id,
+                    User1Id = c.User1Id,
+                    User2Id = c.User2Id,
+                    CreatedAt = c.CreatedAt,
+                    Messages = c.Messages.Select(m => new MessageDto
+                    {
+                        Id = m.Id,
+                        Content = m.Content,
+                        SentAt = m.SentAt
+                    }).ToList()
+                }).ToList(),
+                Posts = user.Posts.Select(p => new PostDto
+                {
+                    Id = p.Id,
+                    Content = p.Content,
+                    CreatedAt = p.CreatedAt
+                }).ToList(),
+                Followers = user.Followers.Select(f => f.Follower.ToUserDto()).ToList(),
+                Following = user.Following.Select(f => f.Followee.ToUserDto()).ToList()
+            };
+        }
 
         // Преобразование CreateUserDto в User
 public static User ToUserFromCreateDTO(this CreateUserDto createUserDto)

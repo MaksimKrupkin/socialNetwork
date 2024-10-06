@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Получаем строку подключения из appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -33,10 +32,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Настройка middleware
-app.UseRouting();
-app.UseAuthorization();
-
-app.MapControllers(); // Не забудьте настроить маршруты
+// Настройка остальных middleware (если есть)...
 
 app.Run();

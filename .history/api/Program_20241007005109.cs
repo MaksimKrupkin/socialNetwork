@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Получаем строку подключения из appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

@@ -1,11 +1,16 @@
 using api.Data;
-using api.Interfaces;
-using api.Repository;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using api.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
 
 // Получаем строку подключения из appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -13,12 +18,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Подключаем PostgreSQL в DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
-
-// Добавляем IUserRepository и UserRepository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+    
 
 // Добавляем контроллеры и другие сервисы
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -33,10 +38,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Настройка middleware
-app.UseRouting();
-app.UseAuthorization();
-
-app.MapControllers(); // Не забудьте настроить маршруты
+// Настройка остальных middleware (если есть)...
 
 app.Run();
