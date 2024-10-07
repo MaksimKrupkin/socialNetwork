@@ -48,27 +48,5 @@ namespace api.Controllers
             await _postRepo.CreateAsync(postModel);
             return CreatedAtAction(nameof(GetById), new { id = postModel.Id}, PostMapper.ToPostDto(postModel));
         }
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePostDto updateDto)
-        {
-          if(!ModelState.IsValid) return BadRequest(ModelState);
-          var postModel = await _postRepo.GetByIdAsync(id);
-          if(postModel == null)
-          {
-            return NotFound();
-          }
-          updateDto.ToPostFromUpdateDTO(postModel);
-          await _postRepo.UpdateAsync(id, postModel);
-          return Ok(postModel.ToPostDto());
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
-        {
-          if (!ModelState.IsValid) return BadRequest(ModelState);
-          var postModel = await _postRepo.DeleteAsync(id);
-          if(postModel == null) return NotFound();
-          return NoContent();
-        }
     }
 }

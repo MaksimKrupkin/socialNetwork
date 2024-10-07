@@ -57,18 +57,6 @@ namespace api.Controllers
           {
             return NotFound();
           }
-          updateDto.ToPostFromUpdateDTO(postModel);
-          await _postRepo.UpdateAsync(id, postModel);
-          return Ok(postModel.ToPostDto());
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
-        {
-          if (!ModelState.IsValid) return BadRequest(ModelState);
-          var postModel = await _postRepo.DeleteAsync(id);
-          if(postModel == null) return NotFound();
-          return NoContent();
         }
     }
 }

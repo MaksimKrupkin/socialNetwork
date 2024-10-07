@@ -5,7 +5,7 @@ using api.Models;
 
 namespace api.Mappers
 {
-    public static class PostMapper
+    public class PostMapper
     {
         // Maps Post to PostDto
         public static PostDto ToPostDto(this Post post)

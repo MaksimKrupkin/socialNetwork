@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using api.Data;
 using api.Dtos;
 using api.Mappers;
+using Microsoft.EntityFrameworkCore;
 using api.Interfaces;
+using api.Repository;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -43,32 +45,9 @@ namespace api.Controllers
         public async Task<IActionResult> Create([FromBody] CreatePostDto createPostDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var userId = 1; // Normally, this would be fetched from the authenticated user's claims.
-            var postModel = PostMapper.ToPostFromCreateDTO(createPostDto, userId);
+            
             await _postRepo.CreateAsync(postModel);
             return CreatedAtAction(nameof(GetById), new { id = postModel.Id}, PostMapper.ToPostDto(postModel));
-        }
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePostDto updateDto)
-        {
-          if(!ModelState.IsValid) return BadRequest(ModelState);
-          var postModel = await _postRepo.GetByIdAsync(id);
-          if(postModel == null)
-          {
-            return NotFound();
-          }
-          updateDto.ToPostFromUpdateDTO(postModel);
-          await _postRepo.UpdateAsync(id, postModel);
-          return Ok(postModel.ToPostDto());
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
-        {
-          if (!ModelState.IsValid) return BadRequest(ModelState);
-          var postModel = await _postRepo.DeleteAsync(id);
-          if(postModel == null) return NotFound();
-          return NoContent();
         }
     }
 }
