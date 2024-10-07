@@ -70,7 +70,7 @@ public class UserRepository : IUserRepository
                 existingUser.PasswordHash = userModel.PasswordHash; // Хешированный пароль
             }
 
-            _context.User.Update(existingUser);
+            await _context.User.Update(existingUser);
             await _context.SaveChangesAsync(); // Сохранение изменений
             return existingUser;
         }
@@ -84,9 +84,8 @@ public class UserRepository : IUserRepository
                 return null;
             }
 
-            _context.User.Remove(user); // Сохранение изменений
-            
-            await _context.SaveChangesAsync();
+            _context.User.Remove(user);
+            await _context.SaveChangesAsync(); // Сохранение изменений
             return user;
         }
     }

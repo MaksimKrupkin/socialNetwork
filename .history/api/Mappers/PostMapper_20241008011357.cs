@@ -30,7 +30,7 @@ namespace api.Mappers
             {
                 Id = postDto.Id,
                 UserId = postDto.UserId,
-                Image = postDto.Image,
+                image = postDto.Image,
                 Content = postDto.Content,
                 CreatedAt = postDto.CreatedAt
                 // Комментарии и лайки обычно управляются отдельно

@@ -12,7 +12,7 @@ namespace api.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
 
         public DbSet<User> User {get; set;}
-        public DbSet<Post> Post {get; set;}
+        public DbSet<Post> Posts {get; set;}
         public DbSet<Like> Likes {get; set;}
         public DbSet<Comment> Comments {get; set;}
         public DbSet<Follow> Follows {get; set;}

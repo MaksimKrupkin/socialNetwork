@@ -52,6 +52,7 @@ namespace api.Controllers
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateUserDto updateDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
+
             // Получаем существующего пользователя из базы данных
             var userModel = await _userRepo.GetByIdAsync(id);
 
@@ -59,8 +60,10 @@ namespace api.Controllers
             {
                 return NotFound();
             }
+
             // Передаем существующего пользователя в метод преобразования
             updateDto.ToUserFromUpdateDTO(userModel); 
+
             // Обновляем пользователя в базе данных
             await _userRepo.UpdateAsync(id, userModel);
 

@@ -59,15 +59,15 @@ namespace api.Mappers
         {
             return new User
             {
-                Email = createUserDto.Email,
-                Bio = createUserDto.Bio,
-                ProfileImageUrl = createUserDto.ProfileImageUrl,
-                BirthDay = DateTime.SpecifyKind(createUserDto.BirthDay, DateTimeKind.Utc), // Установите тип как UTC
-                PasswordHash = createUserDto.Password // Здесь должен быть хеш пароля
+                        Email = createUserDto.Email,
+                        Bio = createUserDto.Bio,
+                        ProfileImageUrl = createUserDto.ProfileImageUrl,
+                        BirthDay = DateTime.SpecifyKind(createUserDto.BirthDay, DateTimeKind.Utc), // Установите тип как UTC
+                        PasswordHash = createUserDto.Password // Здесь должен быть хеш пароля
             };
         }
 
-        public static void ToUserFromUpdateDTO(this UpdateUserDto updateUserDto, User user)
+                public static void ToUserFromUpdateDTO(this UpdateUserDto updateUserDto, User user)
         {
             user.Email = updateUserDto.Email;
             user.Bio = updateUserDto.Bio;
