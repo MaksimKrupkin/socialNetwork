@@ -7,9 +7,9 @@ using api.Models;
 
 namespace api.Mappers
 {
-    public static class CommentMapper
+    public class CommentMapper
     {
-        public static CommentDto ToCommentDto(this Comment comment)
+        public static CommentDto ToCommentDto(Comment comment)
         {
             return new CommentDto
             {
@@ -34,7 +34,8 @@ namespace api.Mappers
         }
         public static void ToCommentFromUpdateDTO(this UpdateCommentDto updateCommentDto, Comment comment)
         {
-            comment.Content = updateCommentDto.Content; 
+            comment.Content = updateCommentDto.Content;
+            
         }
     }
 }

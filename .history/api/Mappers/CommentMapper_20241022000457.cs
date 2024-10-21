@@ -9,7 +9,7 @@ namespace api.Mappers
 {
     public static class CommentMapper
     {
-        public static CommentDto ToCommentDto(this Comment comment)
+        public static CommentDto ToCommentDto(Comment comment)
         {
             return new CommentDto
             {
