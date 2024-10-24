@@ -94,9 +94,6 @@ namespace api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
-
                     b.HasKey("FollowerId", "FolloweeId");
 
                     b.HasIndex("FolloweeId");
