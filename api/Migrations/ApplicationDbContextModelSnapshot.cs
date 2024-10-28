@@ -24,27 +24,19 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Chat", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int>("User1Id")
                         .HasColumnType("integer");
 
                     b.Property<int>("User2Id")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("User1Id");
+                    b.HasKey("User1Id", "User2Id");
 
                     b.HasIndex("User2Id");
 
@@ -138,6 +130,12 @@ namespace api.Migrations
                     b.Property<int>("ChatId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("ChatUser1Id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ChatUser2Id")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
@@ -150,9 +148,7 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChatId");
-
-                    b.HasIndex("SenderId");
+                    b.HasIndex("ChatUser1Id", "ChatUser2Id");
 
                     b.ToTable("Messages");
                 });
@@ -305,19 +301,11 @@ namespace api.Migrations
                 {
                     b.HasOne("api.Models.Chat", "Chat")
                         .WithMany("Messages")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.Models.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
+                        .HasForeignKey("ChatUser1Id", "ChatUser2Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Chat");
-
-                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("api.Models.Post", b =>
