@@ -9,51 +9,46 @@ namespace api.Mappers
     public static class ChatMapper
     {
         // Mapping from Chat to ChatDto
-    public static ChatDto ToChatDto(Chat chat)
-    {
-        if (chat == null) return null;
-
-        return new ChatDto
+        public static ChatDto ToChatDto(Chat chat)
         {
-            User1Id = chat.User1Id,
-            User2Id = chat.User2Id,
-            CreatedAt = chat.CreatedAt,
-            Messages = chat.Messages.Select(ToMessageDto).ToList()
-        };
-    }
+            if (chat == null) return null;
 
-    // Mapping from CreateChatDto to Chat
-    public static Chat ToChatModel(CreateChatDto chatDto)
-    {
-        if (chatDto == null) return null;
-
-        return new Chat
-        {
-            User1Id = chatDto.User1Id,
-            User2Id = chatDto.User2Id,
-            CreatedAt = chatDto.CreatedAt,
-            Messages = chatDto.Messages?.Select(m => new Message
+            return new ChatDto
             {
-                SenderId = m.SenderId,
-                Content = m.Content,
-                SentAt = DateTime.UtcNow
-            }).ToList() ?? new List<Message>()
-        };
-    }
+                User1Id = chat.User1Id,
+                User2Id = chat.User2Id,
+                CreatedAt = chat.CreatedAt,
+                Messages = chat.Messages.Select(ToMessageDto).ToList()
+            };
+        }
 
-    // Mapping from ChatDto to Chat
-    public static Chat ToChatModel(ChatDto chatDto)
-    {
-        if (chatDto == null) return null;
-
-        return new Chat
+        // Mapping from CreateChatDto to Chat
+        public static Chat ToChatModel(CreateChatDto chatDto)
         {
-            User1Id = chatDto.User1Id,
-            User2Id = chatDto.User2Id,
-            CreatedAt = chatDto.CreatedAt,
-            Messages = chatDto.Messages.Select(ToMessageModel).ToList()
-        };
-    }
+            if (chatDto == null) return null;
+
+            return new Chat
+            {
+                User1Id = chatDto.User1Id,
+                User2Id = chatDto.User2Id,
+                CreatedAt = chatDto.CreatedAt,
+                Messages = chatDto.Messages.Select(ToMessageModel).ToList()
+            };
+        }
+
+        // Mapping from ChatDto (without Id) to Chat
+        public static Chat ToChatModel(ChatDto chatDto)
+        {
+            if (chatDto == null) return null;
+
+            return new Chat
+            {
+                User1Id = chatDto.User1Id,
+                User2Id = chatDto.User2Id,
+                CreatedAt = chatDto.CreatedAt,
+                Messages = chatDto.Messages.Select(ToMessageModel).ToList()
+            };
+        }
 
         // Mapping from Message to MessageDto (Removed ChatId)
         public static MessageDto ToMessageDto(Message message)
@@ -62,6 +57,7 @@ namespace api.Mappers
 
             return new MessageDto
             {
+                Id = message.Id,
                 SenderId = message.SenderId,
                 Content = message.Content,
                 SentAt = message.SentAt
@@ -75,6 +71,7 @@ namespace api.Mappers
 
             return new Message
             {
+                Id = messageDto.Id,
                 SenderId = messageDto.SenderId,
                 Content = messageDto.Content,
                 SentAt = messageDto.SentAt

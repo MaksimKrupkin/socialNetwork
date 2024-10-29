@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace api.Dtos
 {
@@ -17,15 +16,9 @@ public class MessageDto
     public class CreateMessageDto
     {
         public int SenderId { get; set; }
-        
-        [Required]
-        public string Content { get; set; }
-
-        [Required]
-        public DateTime SentAt { get; set; }
-
-        // Foreign keys to relate to Chat
         public int ChatUser1Id { get; set; }
         public int ChatUser2Id { get; set; }
+        public string Content { get; set; }
+        public DateTime SentAt { get; set; }
     }
 }

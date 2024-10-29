@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using api.Data;
 using api.Dtos;
 using api.Models;
@@ -27,7 +26,7 @@ namespace api.Repository
                 .Include(c => c.Messages)
                 .ToListAsync();
 
-            return chats.Select<Chat, ChatDto>(ChatMapper.ToChatDto).ToList(); // Явное указание типов
+            return chats.Select(ChatMapper.ToChatDto);
         }
 
         public async Task<ChatDto?> GetByIdAsync(int user1Id, int user2Id)
@@ -40,24 +39,16 @@ namespace api.Repository
             return ChatMapper.ToChatDto(chat);
         }
 
-public async Task<ChatDto> CreateAsync(CreateChatDto createChatDto)
-{
-    var chat = ChatMapper.ToChatModel(createChatDto);
-    chat.CreatedAt = DateTime.UtcNow; // Установка даты создания
+        public async Task<ChatDto> CreateAsync(CreateChatDto createChatDto)
+        {
+            var chat = ChatMapper.ToChatModel(createChatDto);
+            chat.CreatedAt = DateTime.UtcNow; // Установка даты создания
 
-    // Преобразование сообщений из CreateChatDto в Message
-    chat.Messages = createChatDto.Messages.Select(m => new Message
-    {
-        SenderId = m.SenderId,
-        Content = m.Content,
-        SentAt = DateTime.UtcNow // Установка времени отправки
-    }).ToList();
+            _context.Chats.Add(chat);
+            await _context.SaveChangesAsync();
 
-    _context.Chats.Add(chat);
-    await _context.SaveChangesAsync();
-
-    return ChatMapper.ToChatDto(chat);
-}
+            return ChatMapper.ToChatDto(chat);
+        }
 
 public async Task<ChatDto?> UpdateAsync(int user1Id, int user2Id, CreateChatDto updateChatDto)
 {
@@ -71,24 +62,15 @@ public async Task<ChatDto?> UpdateAsync(int user1Id, int user2Id, CreateChatDto 
     chat.User1Id = updateChatDto.User1Id;
     chat.User2Id = updateChatDto.User2Id;
     chat.CreatedAt = updateChatDto.CreatedAt;
-
-    // Преобразование сообщений из CreateChatDto в Message
-    chat.Messages = updateChatDto.Messages.Select(m => new Message
-    {
-        SenderId = m.SenderId,
-        Content = m.Content,
-        SentAt = DateTime.UtcNow // Установка времени отправки
-    }).ToList();
+    chat.Messages = updateChatDto.Messages.Select(ChatMapper.ToMessageModel).ToList();
 
     await _context.SaveChangesAsync();
     return ChatMapper.ToChatDto(chat);
 }
 
-        public async Task<ChatDto?> DeleteAsync(int user1Id, int user2Id)
+        public async Task<ChatDto?> DeleteAsync(int id)
         {
-            var chat = await _context.Chats
-                .FirstOrDefaultAsync(c => (c.User1Id == user1Id && c.User2Id == user2Id) ||
-                                          (c.User1Id == user2Id && c.User2Id == user1Id));
+            var chat = await _context.Chats.FindAsync(id);
             if (chat == null) return null;
 
             _context.Chats.Remove(chat);

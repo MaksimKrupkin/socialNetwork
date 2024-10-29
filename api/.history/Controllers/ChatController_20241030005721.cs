@@ -37,7 +37,7 @@ namespace api.Controllers
         public async Task<ActionResult<ChatDto>> Create(CreateChatDto createChatDto)
         {
             var chat = await _chatRepository.CreateAsync(createChatDto);
-            return CreatedAtAction(nameof(GetById), new { user1Id = chat.User1Id, user2Id = chat.User2Id }, chat);// Вернуть 201 и созданный чат
+            return CreatedAtAction(nameof(GetById), new { id = chat.User1Id }, chat); // Вернуть 201 и созданный чат
         }
 
         [HttpPut("{user1Id}/{user2Id}")]
@@ -49,13 +49,13 @@ namespace api.Controllers
             return Ok(chat);
         }
 
-[HttpDelete("{user1Id}/{user2Id}")]
-public async Task<IActionResult> Delete(int user1Id, int user2Id)
-{
-    var chat = await _chatRepository.DeleteAsync(user1Id, user2Id);
-    if (chat == null) return NotFound();
+        [HttpDelete("{user1Id}/{user2Id}")]
+        public async Task<IActionResult> Delete(int user1Id, int user2Id)
+        {
+            var chat = await _chatRepository.DeleteAsync(user1Id, user2Id);
+            if (chat == null) return NotFound();
 
-    return NoContent(); // Return 204 on successful deletion
-}
+            return NoContent();
+        }
     }
 }

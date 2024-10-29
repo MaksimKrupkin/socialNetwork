@@ -18,16 +18,6 @@ namespace api.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<MessageDto>> GetMessagesByChatIdAsync(int chatUser1Id, int chatUser2Id)
-        {
-            var messages = await _context.Messages
-                .Where(m => (m.ChatUser1Id == chatUser1Id && m.ChatUser2Id == chatUser2Id) ||
-                            (m.ChatUser1Id == chatUser2Id && m.ChatUser2Id == chatUser1Id))
-                .ToListAsync();
-
-            return messages.Select(MessageMapper.ToMessageDto);
-        }
-
         public async Task<MessageDto?> GetByIdAsync(int id)
         {
             var message = await _context.Messages.FindAsync(id);

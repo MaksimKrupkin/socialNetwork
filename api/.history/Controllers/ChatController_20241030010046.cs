@@ -37,7 +37,7 @@ namespace api.Controllers
         public async Task<ActionResult<ChatDto>> Create(CreateChatDto createChatDto)
         {
             var chat = await _chatRepository.CreateAsync(createChatDto);
-            return CreatedAtAction(nameof(GetById), new { user1Id = chat.User1Id, user2Id = chat.User2Id }, chat);// Вернуть 201 и созданный чат
+            return CreatedAtAction(nameof(GetById), new { id = chat.User1Id }, chat); // Вернуть 201 и созданный чат
         }
 
         [HttpPut("{user1Id}/{user2Id}")]
