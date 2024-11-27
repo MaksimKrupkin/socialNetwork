@@ -1,0 +1,30 @@
+* {
+  margin: 0 auto;
+  font-family: 'Favorit Modern', 'Helvetica Neue', 'HelveticaNeue', Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  .wrapper {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-weight: 700;
+
+    .header {
+      height: 50px;
+
+      .logo {
+        font-size: 105px;
+      }
+    }
+    .nav_wpapper {
+      margin-top: 0px;
+      padding: 15px;
+      overflow-y: hidden;
+      .nav_item {
+        display: block;
+        height: 20px;
+        font-size: 14px;
+      }
+    }
+  }
+}

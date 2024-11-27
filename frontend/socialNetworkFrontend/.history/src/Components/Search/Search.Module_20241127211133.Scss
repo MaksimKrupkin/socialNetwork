@@ -1,0 +1,20 @@
+.wrapper {
+  width: 92%;
+  height: 40px;
+  background-color: rgb(13, 13, 13);
+  border: 3px solid transparent;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: 10px;
+  color: white;
+}
+input::placeholder {
+  color: lightgray; /* Укажите нужный цвет */
+  opacity: 0.7; /* Дополнительно можно настроить прозрачность */
+  font-weight: 200;
+}
+.wrapper::focus-within {
+  border: 3px solid rgb(92, 189, 250);
+}
