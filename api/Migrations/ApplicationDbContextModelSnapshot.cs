@@ -127,12 +127,6 @@ namespace api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ChatUser1Id")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ChatUser2Id")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
@@ -143,9 +137,15 @@ namespace api.Migrations
                     b.Property<DateTime>("SentAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("User1Id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("User2Id")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ChatUser1Id", "ChatUser2Id");
+                    b.HasIndex("User1Id", "User2Id");
 
                     b.ToTable("Messages");
                 });
@@ -298,8 +298,8 @@ namespace api.Migrations
                 {
                     b.HasOne("api.Models.Chat", "Chat")
                         .WithMany("Messages")
-                        .HasForeignKey("ChatUser1Id", "ChatUser2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("User1Id", "User2Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Chat");

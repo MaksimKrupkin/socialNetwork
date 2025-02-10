@@ -17,10 +17,10 @@ namespace api.Controllers
             _messageRepository = messageRepository;
         }
 
-        [HttpGet("{chatUser1Id}/{chatUser2Id}")]
-        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesByChatId(int chatUser1Id, int chatUser2Id)
+        [HttpGet("{user1Id}/{user2Id}")]
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesByChatId(int user1Id, int user2Id)
         {
-            var messages = await _messageRepository.GetMessagesByChatIdAsync(chatUser1Id, chatUser2Id);
+            var messages = await _messageRepository.GetMessagesByChatIdAsync(user1Id, user2Id);
             return Ok(messages);
         }
 

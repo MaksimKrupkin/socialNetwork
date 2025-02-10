@@ -2896,6 +2896,7 @@
       "packagesPath": "C:\\Users\\maxim\\.nuget\\packages\\",
       "outputPath": "E:\\SocialNetwork\\api\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "C:\\Users\\maxim\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],

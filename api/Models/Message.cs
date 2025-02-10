@@ -14,11 +14,9 @@ namespace api.Models
         public string Content { get; set; }
         public DateTime SentAt { get; set; }
 
-        // Foreign keys for the composite key of Chat
-        public int ChatUser1Id { get; set; }
-        public int ChatUser2Id { get; set; }
-
-        // Navigation property for Chat
-        public virtual Chat Chat { get; set; }
+        public int User1Id { get; set; }
+        public int User2Id { get; set; }
+        
+        public Chat Chat { get; set; }
     }
 }

@@ -3,35 +3,33 @@ using api.Models;
 
 namespace api.Mappers
 {
-public static class MessageMapper
-{
-
-    public static MessageDto ToMessageDto(Message message)
+    public static class MessageMapper
     {
-        if (message == null) return null;
-
-        return new MessageDto
+        public static MessageDto ToMessageDto(Message message)
         {
-            Id = message.Id,
-            SenderId = message.SenderId,
-            Content = message.Content,
-            SentAt = message.SentAt,
-            ChatUser1Id = message.ChatUser1Id,
-            ChatUser2Id = message.ChatUser2Id
-            // ChatId = calculate ChatId if needed
-        };
-    }
+            if (message == null) return null;
 
-    public static Message ToMessageModel(CreateMessageDto createMessageDto)
-    {
-        return new Message
+            return new MessageDto
+            {
+                Id = message.Id,
+                SenderId = message.SenderId,
+                Content = message.Content,
+                SentAt = message.SentAt,
+                User1Id = message.User1Id,
+                User2Id = message.User2Id
+            };
+        }
+
+        public static Message ToMessageModel(CreateMessageDto createMessageDto)
         {
-            SenderId = createMessageDto.SenderId,
-            ChatUser1Id = createMessageDto.ChatUser1Id,
-            ChatUser2Id = createMessageDto.ChatUser2Id,
-            Content = createMessageDto.Content,
-            SentAt = createMessageDto.SentAt
-        };
+            return new Message
+            {
+                SenderId = createMessageDto.SenderId,
+                User1Id = createMessageDto.User1Id,
+                User2Id = createMessageDto.User2Id,
+                Content = createMessageDto.Content,
+                SentAt = createMessageDto.SentAt
+            };
+        }
     }
-}
 }

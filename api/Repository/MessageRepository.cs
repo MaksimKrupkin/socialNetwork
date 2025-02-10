@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
@@ -18,11 +19,11 @@ namespace api.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<MessageDto>> GetMessagesByChatIdAsync(int chatUser1Id, int chatUser2Id)
+        public async Task<IEnumerable<MessageDto>> GetMessagesByChatIdAsync(int user1Id, int user2Id)
         {
             var messages = await _context.Messages
-                .Where(m => (m.ChatUser1Id == chatUser1Id && m.ChatUser2Id == chatUser2Id) ||
-                            (m.ChatUser1Id == chatUser2Id && m.ChatUser2Id == chatUser1Id))
+                .Where(m => (m.User1Id == user1Id && m.User2Id == user2Id) ||
+                            (m.User1Id == user2Id && m.User2Id == user1Id))
                 .ToListAsync();
 
             return messages.Select(MessageMapper.ToMessageDto);
@@ -50,8 +51,8 @@ namespace api.Repository
             message.Content = updateMessageDto.Content;
             message.SentAt = updateMessageDto.SentAt;
             message.SenderId = updateMessageDto.SenderId;
-            message.ChatUser1Id = updateMessageDto.ChatUser1Id;
-            message.ChatUser2Id = updateMessageDto.ChatUser2Id;
+            message.User1Id = updateMessageDto.User1Id;
+            message.User2Id = updateMessageDto.User2Id;
 
             await _context.SaveChangesAsync();
             return MessageMapper.ToMessageDto(message);

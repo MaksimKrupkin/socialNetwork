@@ -7,10 +7,10 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-// Получаем строку подключения из appsettings.json
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Подключаем PostgreSQL в DbContext
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
@@ -42,8 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Настройка middleware
-app.UseRouting();
+// Настройка middlewareapp.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers(); // Не забудьте настроить маршруты

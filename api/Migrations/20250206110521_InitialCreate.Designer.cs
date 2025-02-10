@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241028204705_UpdateChatModel2")]
-    partial class UpdateChatModel2
+    [Migration("20250206110521_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,15 +130,6 @@ namespace api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ChatId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ChatUser1Id")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ChatUser2Id")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
@@ -149,11 +140,15 @@ namespace api.Migrations
                     b.Property<DateTime>("SentAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("User1Id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("User2Id")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SenderId");
-
-                    b.HasIndex("ChatUser1Id", "ChatUser2Id");
+                    b.HasIndex("User1Id", "User2Id");
 
                     b.ToTable("Messages");
                 });
@@ -304,21 +299,13 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Message", b =>
                 {
-                    b.HasOne("api.Models.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("api.Models.Chat", "Chat")
                         .WithMany("Messages")
-                        .HasForeignKey("ChatUser1Id", "ChatUser2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("User1Id", "User2Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Chat");
-
-                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("api.Models.Post", b =>

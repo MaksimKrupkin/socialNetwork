@@ -5,6 +5,7 @@ E:\SocialNetwork\api\bin\Debug\net8.0\api.deps.json
 E:\SocialNetwork\api\bin\Debug\net8.0\api.runtimeconfig.json
 E:\SocialNetwork\api\bin\Debug\net8.0\api.dll
 E:\SocialNetwork\api\bin\Debug\net8.0\api.pdb
+E:\SocialNetwork\api\bin\Debug\net8.0\BCrypt.Net-Next.dll
 E:\SocialNetwork\api\bin\Debug\net8.0\Humanizer.dll
 E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -89,6 +90,7 @@ E:\SocialNetwork\api\obj\Debug\net8.0\api.AssemblyInfo.cs
 E:\SocialNetwork\api\obj\Debug\net8.0\api.csproj.CoreCompileInputs.cache
 E:\SocialNetwork\api\obj\Debug\net8.0\api.MvcApplicationPartsAssemblyInfo.cs
 E:\SocialNetwork\api\obj\Debug\net8.0\api.MvcApplicationPartsAssemblyInfo.cache
+E:\SocialNetwork\api\obj\Debug\net8.0\api.sourcelink.json
 E:\SocialNetwork\api\obj\Debug\net8.0\staticwebassets.build.json
 E:\SocialNetwork\api\obj\Debug\net8.0\staticwebassets.development.json
 E:\SocialNetwork\api\obj\Debug\net8.0\staticwebassets\msbuild.api.Microsoft.AspNetCore.StaticWebAssets.props
@@ -103,5 +105,3 @@ E:\SocialNetwork\api\obj\Debug\net8.0\refint\api.dll
 E:\SocialNetwork\api\obj\Debug\net8.0\api.pdb
 E:\SocialNetwork\api\obj\Debug\net8.0\api.genruntimeconfig.cache
 E:\SocialNetwork\api\obj\Debug\net8.0\ref\api.dll
-E:\SocialNetwork\api\obj\Debug\net8.0\api.sourcelink.json
-E:\SocialNetwork\api\bin\Debug\net8.0\BCrypt.Net-Next.dll

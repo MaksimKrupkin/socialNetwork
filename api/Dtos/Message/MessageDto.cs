@@ -11,8 +11,8 @@ public class MessageDto
         public DateTime SentAt { get; set; }
 
         // Добавьте свойства ChatUser1Id и ChatUser2Id, если они нужны
-        public int ChatUser1Id { get; set; } // Идентификатор первого пользователя
-        public int ChatUser2Id { get; set; } // Идентификатор второго пользователя
+        public int User1Id { get; set; } // Идентификатор первого пользователя
+        public int User2Id { get; set; } // Идентификатор второго пользователя
     }
     public class CreateMessageDto
     {
@@ -25,7 +25,7 @@ public class MessageDto
         public DateTime SentAt { get; set; }
 
         // Foreign keys to relate to Chat
-        public int ChatUser1Id { get; set; }
-        public int ChatUser2Id { get; set; }
+        public int User1Id { get; set; }
+        public int User2Id { get; set; }
     }
 }
