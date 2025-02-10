@@ -3,29 +3,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace api.Dtos
 {
-public class MessageDto
+    public class MessageDto
     {
         public int Id { get; set; }
         public int SenderId { get; set; }
         public string Content { get; set; }
         public DateTime SentAt { get; set; }
 
-        // Добавьте свойства ChatUser1Id и ChatUser2Id, если они нужны
-        public int User1Id { get; set; } // Идентификатор первого пользователя
-        public int User2Id { get; set; } // Идентификатор второго пользователя
+        public int User1Id { get; set; } // First user identifier
+        public int User2Id { get; set; } // Second user identifier
     }
+
     public class CreateMessageDto
     {
         public int SenderId { get; set; }
-        
-        [Required]
-        public string Content { get; set; }
-
-        [Required]
-        public DateTime SentAt { get; set; }
-
-        // Foreign keys to relate to Chat
         public int User1Id { get; set; }
         public int User2Id { get; set; }
+        public string Content { get; set; }
+        public DateTime SentAt { get; set; }
     }
 }

@@ -8,33 +8,18 @@ namespace api.Mappers
     {
         // Преобразование User в UserDto
         public static UserDto ToUserDto(this User user)
-{
-    if (user == null) return null;
-
-    return new UserDto
-    {
-        Id = user.Id, // Добавлено свойство Id
-        Email = user.Email,
-        Bio = user.Bio,
-        ProfileImageUrl = user.ProfileImageUrl,
-        CreatedAt = user.CreatedAt,
-        BirthDay = user.BirthDay,
-        ChatsAsUser1 = user.ChatsAsUser1.Select(c => new ChatDto
         {
-            User1Id = c.User1Id,
-            User2Id = c.User2Id,
-            CreatedAt = c.CreatedAt
-            // Добавьте другие необходимые свойства
-        }).ToList(),
-        ChatsAsUser2 = user.ChatsAsUser2.Select(c => new ChatDto
-        {
-            User1Id = c.User1Id,
-            User2Id = c.User2Id,
-            CreatedAt = c.CreatedAt
-            // Добавьте другие необходимые свойства
-        }).ToList()
-    };
-}
+            return new UserDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Bio = user.Bio,
+                ProfileImageUrl = user.ProfileImageUrl,
+                CreatedAt = user.CreatedAt,
+                BirthDay = user.BirthDay,
+                NickName = user.NickName
+            };
+        }
 
         // Преобразование User в UserWithDetailsDto
         public static UserWithDetailsDto ToUserWithDetailsDto(this User user)
@@ -79,7 +64,8 @@ namespace api.Mappers
                 Email = createUserDto.Email,
                 Bio = createUserDto.Bio,
                 ProfileImageUrl = createUserDto.ProfileImageUrl,
-                BirthDay = DateTime.SpecifyKind(createUserDto.BirthDay, DateTimeKind.Utc),
+                BirthDay = createUserDto.BirthDay,
+                NickName = createUserDto.NickName,
                 PasswordHash = createUserDto.Password
             };
         }

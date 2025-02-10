@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,14 +20,14 @@ namespace api.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<MessageDto>> GetMessagesByChatIdAsync(int user1Id, int user2Id)
+        public async Task<IEnumerable<MessageDto>> GetMessagesByChatIdAsync(int chatUser1Id, int chatUser2Id)
         {
             var messages = await _context.Messages
-                .Where(m => (m.User1Id == user1Id && m.User2Id == user2Id) ||
-                            (m.User1Id == user2Id && m.User2Id == user1Id))
+                .Where(m => m.ChatId == chatUser1Id || m.ChatId == chatUser2Id)
                 .ToListAsync();
 
-            return messages.Select(MessageMapper.ToMessageDto);
+            return messages.Select(MessageMapper.ToMessageDto)
+                           .Where(dto => dto != null)!; // Null-safe filtering
         }
 
         public async Task<MessageDto?> GetByIdAsync(int id)
@@ -40,7 +41,7 @@ namespace api.Repository
             var message = MessageMapper.ToMessageModel(createMessageDto);
             _context.Messages.Add(message);
             await _context.SaveChangesAsync();
-            return MessageMapper.ToMessageDto(message);
+            return MessageMapper.ToMessageDto(message)!;
         }
 
         public async Task<MessageDto?> UpdateAsync(int id, CreateMessageDto updateMessageDto)
@@ -51,8 +52,7 @@ namespace api.Repository
             message.Content = updateMessageDto.Content;
             message.SentAt = updateMessageDto.SentAt;
             message.SenderId = updateMessageDto.SenderId;
-            message.User1Id = updateMessageDto.User1Id;
-            message.User2Id = updateMessageDto.User2Id;
+            message.ChatId = updateMessageDto.User1Id; // Assuming ChatId maps to User1Id
 
             await _context.SaveChangesAsync();
             return MessageMapper.ToMessageDto(message);

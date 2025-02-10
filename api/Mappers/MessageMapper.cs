@@ -5,7 +5,7 @@ namespace api.Mappers
 {
     public static class MessageMapper
     {
-        public static MessageDto ToMessageDto(Message message)
+        public static MessageDto? ToMessageDto(Message? message)
         {
             if (message == null) return null;
 
@@ -15,8 +15,8 @@ namespace api.Mappers
                 SenderId = message.SenderId,
                 Content = message.Content,
                 SentAt = message.SentAt,
-                User1Id = message.User1Id,
-                User2Id = message.User2Id
+                User1Id = message.ChatId, // Assuming mapping for ChatId to User1Id/User2Id as placeholders
+                User2Id = message.ChatId
             };
         }
 
@@ -25,8 +25,7 @@ namespace api.Mappers
             return new Message
             {
                 SenderId = createMessageDto.SenderId,
-                User1Id = createMessageDto.User1Id,
-                User2Id = createMessageDto.User2Id,
+                ChatId = createMessageDto.User1Id, // Assuming User1Id or User2Id maps to ChatId
                 Content = createMessageDto.Content,
                 SentAt = createMessageDto.SentAt
             };

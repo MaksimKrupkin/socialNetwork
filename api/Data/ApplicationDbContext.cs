@@ -37,27 +37,27 @@ namespace api.Data
                 .Property(u => u.Id)
                 .ValueGeneratedOnAdd();
 
+            // Удаляем составной ключ для Chat
             modelBuilder.Entity<Chat>()
-                .HasKey(c => new { c.User1Id, c.User2Id });
+                .HasKey(c => c.Id);  // Теперь используем только Id как первичный ключ
 
-            // Configure User1 relationship
+            // Остальная настройка отношений остается прежней
             modelBuilder.Entity<Chat>()
                 .HasOne(c => c.User1)
-                .WithMany(u => u.ChatsAsUser1) // Points to User.ChatsAsUser1
+                .WithMany(u => u.ChatsAsUser1)
                 .HasForeignKey(c => c.User1Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Configure User2 relationship
             modelBuilder.Entity<Chat>()
                 .HasOne(c => c.User2)
-                .WithMany(u => u.ChatsAsUser2) // Points to User.ChatsAsUser2
+                .WithMany(u => u.ChatsAsUser2)
                 .HasForeignKey(c => c.User2Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Message>()
-                .HasOne(m => m.Chat)
-                .WithMany(c => c.Messages)
-                .HasForeignKey(m => new { m.User1Id, m.User2Id })
+                .HasOne(m => m.Sender)
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
                 .OnDelete(DeleteBehavior.Restrict);
 
 

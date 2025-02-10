@@ -15,6 +15,8 @@ namespace api.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Убедитесь, что время в UTC
         public DateTime BirthDay { get; set; }
         public string PasswordHash { get; set; } = string.Empty;
+        
+        public string NickName { get; set; } = string.Empty;
 
         public ICollection<Chat> ChatsAsUser1 { get; set; } = new List<Chat>();
         public ICollection<Chat> ChatsAsUser2 { get; set; } = new List<Chat>();

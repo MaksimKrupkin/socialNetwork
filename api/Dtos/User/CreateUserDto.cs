@@ -12,6 +12,8 @@ namespace api.Dtos
       public string Bio { get; set; }
       public string ProfileImageUrl { get; set; }
       public DateTime BirthDay { get; set; }
+      
+      public string NickName { get; set; }
       public string Password { get; set; } 
     }
 }

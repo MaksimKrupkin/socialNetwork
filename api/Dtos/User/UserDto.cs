@@ -11,6 +11,8 @@ namespace api.Dtos
         public string ProfileImageUrl { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime BirthDay { get; set; }
+        
+        public string NickName { get; set; }
 
         // Добавление свойств для чатов
         public List<ChatDto> ChatsAsUser1 { get; set; } = new List<ChatDto>();

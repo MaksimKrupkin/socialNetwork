@@ -11,12 +11,11 @@ namespace api.Models
         public int Id { get; set; }
 
         public int SenderId { get; set; }
-        public string Content { get; set; }
-        public DateTime SentAt { get; set; }
+        public User Sender { get; set; } // Навигационное свойство для пользователя-отправителя
+        public string Content { get; set; } = string.Empty;
+        public DateTime SentAt { get; set; } = DateTime.UtcNow;
 
-        public int User1Id { get; set; }
-        public int User2Id { get; set; }
-        
+        public int ChatId { get; set; } // Foreign key for chat
         public Chat Chat { get; set; }
     }
 }
