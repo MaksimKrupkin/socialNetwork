@@ -13,7 +13,7 @@ namespace api.Dtos
       public string Bio { get; set; }
       public string ProfileImageUrl { get; set; }
       
-      public string NickName { get; set; }
+      public string UserName  { get; set; }
       public DateTime CreatedAt { get; set; }
       public DateTime BirthDay { get; set; }
       // Для передачи чатов

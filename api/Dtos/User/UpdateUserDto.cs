@@ -13,7 +13,7 @@ namespace api.Dtos
       public string ProfileImageUrl { get; set; }
       public DateTime BirthDay { get; set; }
       
-      public string NickName { get; set; }
+      public string UserName  { get; set; }
       // Возможно, я захочу добавить поле для смены пароля
       public string Password { get; set; } // Это можно сделать опциональным
     }

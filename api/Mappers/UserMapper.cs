@@ -17,7 +17,7 @@ namespace api.Mappers
                 ProfileImageUrl = user.ProfileImageUrl,
                 CreatedAt = user.CreatedAt,
                 BirthDay = user.BirthDay,
-                NickName = user.NickName
+                UserName  = user.UserName 
             };
         }
 
@@ -65,7 +65,7 @@ namespace api.Mappers
                 Bio = createUserDto.Bio,
                 ProfileImageUrl = createUserDto.ProfileImageUrl,
                 BirthDay = createUserDto.BirthDay,
-                NickName = createUserDto.NickName,
+                UserName  = createUserDto.UserName ,
                 PasswordHash = createUserDto.Password
             };
         }

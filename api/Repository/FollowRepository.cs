@@ -57,7 +57,7 @@ namespace api.Repository
 
         public async Task<bool> UserExistsAsync(int userId)
         {
-            return await _context.User.AnyAsync(u => u.Id == userId);
+            return await _context.Users.AnyAsync(u => u.Id == userId);
         }
     }
 }

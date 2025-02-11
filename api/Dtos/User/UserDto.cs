@@ -12,7 +12,7 @@ namespace api.Dtos
         public DateTime CreatedAt { get; set; }
         public DateTime BirthDay { get; set; }
         
-        public string NickName { get; set; }
+        public string UserName  { get; set; }
 
         // Добавление свойств для чатов
         public List<ChatDto> ChatsAsUser1 { get; set; } = new List<ChatDto>();
