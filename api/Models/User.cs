@@ -6,12 +6,15 @@ namespace api.Models
 {
     public class User : IdentityUser<int>  // Используем IdentityUser<int>
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public override int Id { get; set; }
         public string Bio { get; set; } = string.Empty;
         public string ProfileImageUrl { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime BirthDay { get; set; }
         
-        // public string UserName  { get; set; } 
+        public string RefreshToken { get; set; } = string.Empty;
+        public DateTime RefreshTokenExpiryTime { get; set; }
 
         // Навигационные свойства
         public ICollection<Chat> ChatsAsUser1 { get; set; } = new List<Chat>();
