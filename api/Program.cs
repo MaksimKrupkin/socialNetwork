@@ -40,6 +40,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
+
         {
             ValidateIssuer = true,
             ValidIssuer = configuration["Jwt:Issuer"],
@@ -53,7 +54,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             RoleClaimType = ClaimTypes.Role
         };
     });
-
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen(c =>

@@ -13,8 +13,8 @@ namespace api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
-        private readonly IConfiguration _configuration;
+        private readonly UserManager<User> _userManager; // UserManager<TUser> — это встроенный в ASP.NET Core класс, предоставляемый библиотекой Microsoft.AspNetCore.Identity.
+        private readonly IConfiguration _configuration; // IConfiguration — это интерфейс, предоставляемый ASP.NET Core, для доступа к конфигурационным настройкам приложения.
 
         public AuthController(UserManager<User> userManager, IConfiguration configuration)
         {
