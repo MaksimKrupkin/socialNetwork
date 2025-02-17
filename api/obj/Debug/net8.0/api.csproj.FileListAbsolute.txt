@@ -145,3 +145,12 @@ E:\SocialNetwork\api\obj\Debug\net8.0\refint\api.dll
 E:\SocialNetwork\api\obj\Debug\net8.0\api.pdb
 E:\SocialNetwork\api\obj\Debug\net8.0\api.genruntimeconfig.cache
 E:\SocialNetwork\api\obj\Debug\net8.0\ref\api.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\SocialNetwork\api\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll

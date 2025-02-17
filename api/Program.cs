@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
+using api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -40,7 +40,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
-
         {
             ValidateIssuer = true,
             ValidIssuer = configuration["Jwt:Issuer"],
@@ -54,6 +53,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             RoleClaimType = ClaimTypes.Role
         };
     });
+
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen(c =>
@@ -84,6 +84,17 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        policy => policy.WithOrigins("http://localhost:3000") // URL React-приложения
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -93,8 +104,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+app.UseCors("CorsPolicy");
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();
