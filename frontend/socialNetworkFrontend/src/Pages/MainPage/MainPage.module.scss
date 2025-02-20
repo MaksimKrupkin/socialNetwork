@@ -7,3 +7,20 @@
   font-weight: 700;
   font-family: 'Favorit Modern', 'Helvetica Neue', 'HelveticaNeue', Arial, Helvetica, sans-serif;
 }
+
+.stories{
+  position: absolute;
+  top: 20px;
+  left: 270px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.posts{
+  position: absolute;
+  top: 130px;
+  left: 296px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}

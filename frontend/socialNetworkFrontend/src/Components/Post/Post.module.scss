@@ -1,0 +1,57 @@
+﻿.wrapper{
+  //border: 1px solid gray;
+  height: 700px;
+  width: 500px;
+  .header{
+    .avatar{
+      margin-left: 3px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 120px;
+      height: 40px;
+      .image{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+      .userName{
+        font-size: 12px;
+        font-weight: 300;
+      }
+    }
+    .createdAt{
+      font-size: 12px;
+      font-weight: 300;
+      position: absolute;
+      top:25px;
+      right:15px;
+      color:gray;
+    }
+  }
+  .content{
+    .image{
+      width: 500px;
+      height: 550px;
+      border-radius: 5px;
+    }
+  }
+  .footer{
+    .wrap{
+    margin: 12px;
+    margin-left: 2px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    }
+    .likesCounter{
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  
+
+}
