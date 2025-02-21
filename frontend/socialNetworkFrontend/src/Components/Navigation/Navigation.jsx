@@ -20,7 +20,7 @@ const Navigation = () => {
       </div>
       <div className={styles.item}>
         <FaRegNewspaper fontSize={20} />
-        <span className={styles.text}>Новости</span>
+        <span className={styles.text}>Главная</span>
       </div>
       <div className={styles.item}>
         <TbMessageCircle fontSize={20} />
